@@ -1,0 +1,88 @@
+﻿@model System.Collections.Generic.List<Homework.Models.PDFObject>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h4>Lorem!</h4>
+            </div>
+            <table class="table table-striped">
+                <thead class="thead-dark h6">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th class="text-center">Preview</th>
+                        <th class="text-center">Delete</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Count!=0)
+                    {
+                        foreach (var PDF in Model)
+                        {
+                        <tr>
+                            <td>@PDF.ID</td>
+                            <td>@PDF.Name</td>
+
+                            <td class="text-center"><a href="Home/PreviewPDF/@PDF.ID">@PDF.Name@String.Format(".pdf")</a></td>
+                            <td class="text-center">
+                                <!--  <a href="index.html" data-toggle="modal" data-target="#addPDFModal">
+          <i class="fa fa-trash text-danger"></i>
+      </a>-->                   
+                                <a href="Home/DeletePDF/@PDF.ID">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                    }
+                    @{      string display="d-none";
+                        if (Model.Count == 0)
+                        { display = "d-block"; }
+                    }
+
+
+                        <tr class="@display">
+                            
+                            <td class="text-center" colspan="4" ><span class="text-danger">No PDF's Available!</span></td>
+                            
+                        </tr>
+                    
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="addPDFModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">PDF Content</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <a href="@Url.Action("AddPDF")" class="btn btn-xs btn-danger">
+                <span>Add</span>
+                <i class="fas fa-plus"></i>
+            
+            </a>
+        </div>
+    </div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
